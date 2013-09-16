@@ -1,39 +1,61 @@
-<p>
-    <i>( Describe task in general )</i>
-</p>
+<div class="story">
+    <p>Stephen and Sofia wander off for a moment, taking a break from the packing and piling and fixing of things on the
+        ship. Randomly, they happen upon an Open Labyrinth they had never seen before on their home island.</p>
+
+    <p>“Look, there’s plenty of adventure to be had right here at home.” exclaimed Stephen. “Are you really sure you
+        want to leave?”</p>
+
+    <p>“Nonsense. The real adventure is out there!” She responded while waving to the sky. “But, maybe we can conquer
+        this little challenge right here before we lift off into the unknown...”</p>
+</div>
+
+<p>The labyrinth has no walls, but pits surround the path on each side. If a player falls into a pit, they lose. The
+    labyrinth is presented as a matrix (a list of lists): 1 is a pit and 0 is part of the path. The labyrinth's size is
+    12 x 12 and the outer cells are also pits. Players start at cell (1,1). The exit is at cell (10,10). You need to
+    find a route through the labyrinth. Players can move in only four directions--South (down [1,0]), North (up [-1,0]),
+    East (right [0,1]), West (left [0, -1]). The route is described as a string consisting of different characters:
+    "S"=South, "N"=North, "E"=East, and "W"=West.</p>
+
+<p class="p1 for_info_only"><img title="open-labyrinth"
+                                 src="{{ MEDIA }}open-labyrinth.png"
+                                 alt="open-labyrinth"
+                                 width="600px"/></p>
+<p class="p1 for_editor_only"><img title="open-labyrinth"
+                                   src="{{ MEDIA }}open-labyrinth.png"
+                                   alt="open-labyrinth"
+                                   width="380px"/></p>
 
 <p>
-    Sum two passed ints
-</p>
-
-<p style="text-align: center;">
-    <img class="for_info_only" title="example" src="{{MEDIA}}example.png" alt="example" width="392px"/>
-    <img class="for_editor_only" title="example" src="{{MEDIA}}example.png" alt="example" width="380px"/>
-</p>
-
-<p><i>( Explain input and output values )</i></p>
-<p>
-    <strong>Input: </strong> Two arguments. Both are int
+    <strong>Input: </strong> A labyrinth's map. A list of lists with 1 and 0.
 </p>
 
 <p>
-    <strong>Output: </strong> Int. 
+    <strong>Output: </strong> A route. A string that contain "W", "E", "N" and "S".
 </p>
-
 
 
 <div class="for_info_only">
     <p><i>( Put some usage examples )</i></p>
+
     <p>
         <strong>Example:</strong>
     </p>
-    <pre class="brush: python">
-checkio(3, 2) == 5
-checkio(5, 7) == 12
-    </pre>
+    <pre class="brush: python">checkio([
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1],
+    [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])</pre>
 </div>
 
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    <i>(Here you can explain how it can be used in development and what is usage of this.)</i>
+    It's classical task for searching a path in graphs. This is using for a navigational software and a game's industry.
 </p>
