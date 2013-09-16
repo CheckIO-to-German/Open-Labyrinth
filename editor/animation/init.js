@@ -194,27 +194,138 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
 
         });
 
+        var tMaze = [
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1],
+            [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1],
+            [1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+            [1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1],
+            [1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1],
+            [1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1],
+            [1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1],
+            [1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1],
+            [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1],
+            [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        ];
 
-        var colorOrange4 = "#F0801A";
-        var colorOrange3 = "#FA8F00";
-        var colorOrange2 = "#FAA600";
-        var colorOrange1 = "#FABA00";
+        var player;
+        var animationTimeouts = [];
+        var tooltip = false;
+        var $tryit;
 
-        var colorBlue4 = "#294270";
-        var colorBlue3 = "#006CA9";
-        var colorBlue2 = "#65A1CF";
-        var colorBlue1 = "#8FC7ED";
+        ext.set_console_process_ret(function(this_e, ret){
+            $tryit.find(".checkio-result");
+            if (!ret) {
+                $tryit.find(".checkio-result .in-result").html("Empty result");
+                return false;
+            }
+            ret = ret.replace("'", "");
+            ret = ret.replace('"', '');
+            var result = checkRoute(tMaze, ret);
+            var route = result[0] !== '' ? "S" + result[0] : '';
+            var message = result[1];
+            animateRoute(route, player, animationTimeouts);
+            player.transform("");
+            $tryit.find(".checkio-result .in-result").html(message);
+        });
 
-        var colorGrey4 = "#737370";
-        var colorGrey3 = "#9D9E9E";
-        var colorGrey2 = "#C5C6C6";
-        var colorGrey1 = "#EBEDED";
+        ext.set_generate_animation_panel(function(this_e){
 
-        var colorWhite = "#FFFFFF";
-        //Your Additional functions or objects inside scope
-        //
-        //
-        //
+            $tryit = $(this_e.setHtmlTryIt(ext.get_template('tryit')));
+            var tGrid = [];
+            var tpaper = createGrid($tryit.find(".tryit-canvas")[0], tGrid);
+            var fullCell = {"stroke":colorBase, "fill":colorBase, "fill-opacity":1};
+            var emptyCell = {"stroke":colorBlue, "fill":colorBlue, "fill-opacity":0};
+
+            $tryit.find(".tryit-canvas").mouseenter(function(e) {
+                if (tooltip) {
+                    return false;
+                }
+                var $tooltip = $tryit.find(".tryit-canvas .tooltip");
+                $tooltip.fadeIn(1000);
+                setTimeout(function() {
+                    $tooltip.fadeOut(1000);
+                }, 2000);
+                tooltip = true;
+            });
+
+            for (var i = 0; i < nCell; i++) {
+                for (var j = 0; j < nCell; j++) {
+                    if (tMaze[i][j]) {
+                        tGrid[i][j].attr(fullCell);
+                    }
+                    else {
+                        tGrid[i][j].attr(emptyCell);
+                    }
+                }
+            }
+
+            var mouseUpGrid = true;
+
+
+            var toggleCellFunc = function (e) {
+                var x = i;
+                var y = j;
+                var typeEvent = e;
+                var self = this;
+                return function () {
+                    if (typeEvent === "mouseover" && mouseUpGrid) {
+                        return false;
+                    }
+                    if (typeEvent === "mousedown") {
+//                        e.preventDefault();
+                        mouseUpGrid = false;
+                    }
+                    if (typeEvent === "mouseup") {
+                        mouseUpGrid = true;
+                        return false;
+                    }
+                    if (tMaze[x][y] == 1) {
+                        tGrid[x][y].attr(emptyCell);
+                        tMaze[x][y] = 0;
+                    }
+                    else {
+                        tGrid[x][y].attr(fullCell);
+                        tMaze[x][y] = 1;
+                    }
+                    for (var i = animationTimeouts.length; i >= 0; i--) {
+                        clearTimeout(animationTimeouts[i]);
+                    }
+
+                    animationTimeouts = [];
+                    setTimeout(function() {player.transform("");}, stepDelay * 2);
+
+                }
+            };
+
+            for (i = 1; i < nCell - 1; i++) {
+                for (j = 1; j < nCell - 1; j++) {
+                    if ((i == 1 && j == 1) || (i == nCell - 2 && j == nCell - 2)) continue;
+                    tGrid[i][j].mousedown(toggleCellFunc("mousedown"));
+                    tGrid[i][j].mouseup(toggleCellFunc("mouseup"));
+                    tGrid[i][j].mouseover(toggleCellFunc("mouseover"));
+                }
+            }
+
+            player = tpaper.path(Raphael.format("M{0},{1}L{2},{3}L{4},{5}L{6},{7}L{8},{9}z",
+                    userZeroX + 3, userZeroY + 3, userZeroX + 10, userZeroY + 17, userZeroX + 17,
+                    userZeroY + 3, userZeroX + 10, userZeroY + 6, userZeroX + 3, userZeroY + 3)).attr({
+                    "color":colorBase, "stroke-width":1, "fill":colorBase});
+
+            tGrid[nCell-2][nCell-2].attr({"fill": colorOrange, "fill-opacity": 1});
+
+            var $bn = $tryit.find(".bn-check");
+            $bn.click(function (e) {
+                //send tmaze
+                this_e.sendToConsoleCheckiO(tMaze);
+                e.stopPropagation();
+
+                return false;
+            });
+
+
+        });
 
 
     }
