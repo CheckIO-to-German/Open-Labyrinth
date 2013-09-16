@@ -154,7 +154,7 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
             var result_text = data.ext["result_addon"][1];
 
             var grid = [];
-            var canvas = createGrid($explanation[0], grid);
+            var canvas = createGrid($content.find(".explanation")[0], grid);
             //
             for (var i = 0; i < nCell; i++) {
                 for (var j = 0; j < nCell; j++) {
@@ -183,6 +183,7 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
                 $content.find('.answer').html(result_text);
 
                 $content.find('.output').addClass('error');
+                $content.find('.answer').addClass('error');
                 $content.find('.call').addClass('error');
             }
             else {
