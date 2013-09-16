@@ -191,7 +191,7 @@ fieldset[disabled] .btn {
     background-color: #eeeeee;
 }
 
-.tryit-content rect{
+.tryit-content .tryit-canvas * {
     -webkit-user-select: none;
 }
 /* Your CSS */
