@@ -43,9 +43,8 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
         var colorOrange = "#F0801A";
         var colorBlue = "#65A1CF";
         var nCell = 12;
-        var delay = 200;
-        //delayStep MUST BE MORE then delay!!!
-        var stepDelay = delay * 2
+        var delay = 130;
+        var stepDelay = delay * 2;
 
         var DIRECTIONS = {"S":[1, 0], "N":[-1, 0], "E":[0, 1], "W":[0, -1]};
 
@@ -54,7 +53,7 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
             "NS":"R180T0," + sCell, "NE":"R90T" + sCell + ",0", "NW":"R-90T-" + sCell + ",0", "NN":"T0,-" + sCell,
             "ES":"R90T0," + sCell, "EE":"T" + sCell + ",0", "EW":"R180T-" + sCell + ",0", "EN":"R-90T0,-" + sCell,
             "WS":"R-90T0," + sCell, "WE":"R180T" + sCell + ",0", "WW":"T-" + sCell + ",0", "WN":"R90T0,-" + sCell
-        }
+        };
 
         function checkRoute(maze, route) {
             var resRoute = '';
@@ -195,19 +194,19 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
         });
 
         var tMaze = [
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1],
-            [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1],
-            [1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
-            [1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1],
-            [1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1],
-            [1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1],
-            [1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1],
-            [1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1],
-            [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1],
-            [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-        ];
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+                [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+                [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1],
+                [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1],
+                [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+                [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            ];
 
         var player;
         var animationTimeouts = [];
@@ -237,7 +236,9 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
             var tpaper = createGrid($tryit.find(".tryit-canvas")[0], tGrid);
             var fullCell = {"stroke":colorBase, "fill":colorBase, "fill-opacity":1};
             var emptyCell = {"stroke":colorBlue, "fill":colorBlue, "fill-opacity":0};
-
+            $tryit.find(".tryit-canvas").mousedown(function (e) {
+                e.originalEvent.preventDefault();
+            });
             $tryit.find(".tryit-canvas").mouseenter(function(e) {
                 if (tooltip) {
                     return false;
