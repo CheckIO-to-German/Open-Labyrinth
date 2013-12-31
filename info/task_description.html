@@ -1,3 +1,5 @@
+
+
 <div class="story">
     <p>Stephen and Sofia wander off for a moment, taking a break from the packing and piling and fixing of things on the
         ship. By accident they wander by an Open Labyrinth they had never seen before on their home island.</p>
@@ -53,9 +55,70 @@
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])</pre>
 </div>
 
+
+
+
+<style>
+    #task-hints .hint {
+        display: none;
+    }
+
+    #task-hints ul {
+        margin-top: 10px;
+    }
+
+    #task-hints ul li {
+        text-indent: 20px;
+        font-style: italic;
+    }
+</style>
+
+<div>
+    <strong>Hints:</strong> It can help, if you get stuck<br>
+    <div id="task-hints">
+        <ul>
+            <li>
+                <a href="javascript: void(0)">Hint 1</a>
+                <span class="hint">
+                    The labyrinth in this task can be represented as graph.
+                    Just think about where you can go from each cell and find the correlating path in the graph.
+                </span>
+            </li>
+            <li>
+                <a class="hint-link" href="javascript: void(0)">Hint 2</a>
+                <span class="hint">
+                    The simplest way is Breath-First-Search algorithm. But don't mix up graph and tree search.
+                </span>
+            </li>
+            <li>
+                <a class="hint-link" href="">Hint 3</a>
+                <span class="hint">
+                    Do you want nice and quick solution? Read about A* search algorithm and don't forget about admissible heuristic.
+                </span>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var $hintLink = $("#task-hints li a");
+    $hintLink.click(function(e){
+        e.preventDefault();
+        var $this = $(this);
+        $this.hide();
+        $this.parent().find(".hint").slideDown();
+        return false;
+    })
+</script>
+
+
+
+
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    This is a classical problem for searching a path in graphs. It can be used for navigation software and the gaming industry.
+    This is a classical problem for searching a path in graphs. It can be used for navigation software and the gaming
+    industry.
 </p>
 
 <p class="for_info_only">
