@@ -2,23 +2,35 @@
 #You can import some modules or create additional functions
 
 
-def checkio(data):
-    #Your code here
-    #It's main function. Don't remove this function
-    #It's using for auto-testing and must return a result for check.
-
+def checkio(maze_map):
     #replace this for solution
     #This is just example for first maze
     return "SSSSSEENNNEEEEEEESSWWWWSSSEEEESS"
 
-#Some hints
-#Look to graph search algorithms
-#Don't confuse these with tree search algorithms
-
-
 #This code using only for self-checking and not necessary for auto-testing
 if __name__ == '__main__':
-    print(checkio([
+    from copy import deepcopy
+
+    MOVE = {"S": (1, 0), "N": (-1, 0), "W": (0, -1), "E": (0, 1)}
+
+    def check_route(labyrinth, route):
+        pos = (1, 1)
+        goal = (10, 10)
+        for i, d in enumerate(route):
+            move = MOVE.get(d, None)
+            if not move:
+                print("Wrong symbol in route")
+                return False
+            pos = pos[0] + move[0], pos[1] + move[1]
+            if pos == goal:
+                return True
+            if labyrinth[pos[0]][pos[1]] == 1:
+                print("Player in the pit")
+                return False
+        print("Player did not reach exit")
+        return False
+
+    first_maze = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
@@ -30,8 +42,23 @@ if __name__ == '__main__':
         [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]))
-    print(checkio([
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+
+    empty_maze = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+
+    up_down_maze = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
         [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
@@ -43,24 +70,9 @@ if __name__ == '__main__':
         [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
         [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
         [1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]))
-    #be careful with infinity loop
-    print(checkio([
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]))
-    print(checkio([
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+
+    dotted_maze = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
         [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1],
@@ -72,9 +84,9 @@ if __name__ == '__main__':
         [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1],
         [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
         [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    ]))
-    print(checkio([
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+
+    need_left_maze = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
@@ -86,5 +98,11 @@ if __name__ == '__main__':
         [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
         [1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ]))
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+
+    # These assert are using only for self-testing as examples.
+    assert check_route(first_maze, checkio(deepcopy(first_maze))), "First maze"
+    assert check_route(empty_maze, checkio(deepcopy(empty_maze))), "Empty maze"
+    assert check_route(up_down_maze, checkio(deepcopy(up_down_maze))), "Up and down maze"
+    assert check_route(dotted_maze, checkio(deepcopy(dotted_maze))), "Dotted maze"
+    assert check_route(need_left_maze, checkio(deepcopy(need_left_maze))), "Need left maze"
