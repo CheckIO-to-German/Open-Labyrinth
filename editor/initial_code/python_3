@@ -9,11 +9,10 @@ def checkio(maze_map):
 
 #This code using only for self-checking and not necessary for auto-testing
 if __name__ == '__main__':
-    from copy import deepcopy
-
-    MOVE = {"S": (1, 0), "N": (-1, 0), "W": (0, -1), "E": (0, 1)}
-
-    def check_route(labyrinth, route):
+    def check_route(func, labyrinth):
+        MOVE = {"S": (1, 0), "N": (-1, 0), "W": (0, -1), "E": (0, 1)}
+        #copy maze
+        route = func([row[:] for row in labyrinth])
         pos = (1, 1)
         goal = (10, 10)
         for i, d in enumerate(route):
@@ -30,7 +29,8 @@ if __name__ == '__main__':
         print("Player did not reach exit")
         return False
 
-    first_maze = [
+    # These assert are using only for self-testing as examples.
+    assert check_route(checkio, [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
@@ -42,9 +42,8 @@ if __name__ == '__main__':
         [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
-
-    empty_maze = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]), "First maze"
+    assert check_route(checkio, [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -56,9 +55,8 @@ if __name__ == '__main__':
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
-
-    up_down_maze = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]), "Empty maze"
+    assert check_route(checkio, [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
         [1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
@@ -70,9 +68,8 @@ if __name__ == '__main__':
         [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
         [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
         [1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
-
-    dotted_maze = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]), "Up and down maze"
+    assert check_route(checkio, [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
         [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1],
@@ -84,9 +81,8 @@ if __name__ == '__main__':
         [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1],
         [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1],
         [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
-
-    need_left_maze = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]), "Dotted maze"
+    assert check_route(checkio, [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
         [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
@@ -98,11 +94,5 @@ if __name__ == '__main__':
         [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
         [1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
-
-    # These assert are using only for self-testing as examples.
-    assert check_route(first_maze, checkio(deepcopy(first_maze))), "First maze"
-    assert check_route(empty_maze, checkio(deepcopy(empty_maze))), "Empty maze"
-    assert check_route(up_down_maze, checkio(deepcopy(up_down_maze))), "Up and down maze"
-    assert check_route(dotted_maze, checkio(deepcopy(dotted_maze))), "Dotted maze"
-    assert check_route(need_left_maze, checkio(deepcopy(need_left_maze))), "Need left maze"
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]), "Need left maze"
+    print("The local tests are done.")
