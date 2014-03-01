@@ -7,8 +7,8 @@ def checkio(maze_map):
     #This is just example for first maze
     return "SSSSSEENNNEEEEEEESSWWWWSSSEEEESS"
 
-#This code using only for self-checking and not necessary for auto-testing
 if __name__ == '__main__':
+    #This code using only for self-checking and not necessary for auto-testing
     def check_route(func, labyrinth):
         MOVE = {"S": (1, 0), "N": (-1, 0), "W": (0, -1), "E": (0, 1)}
         #copy maze
