@@ -20,21 +20,21 @@
     "S"=South, "N"=North, "E"=East, and "W"=West.
 </p>
 
-<p class="p1 for_info_only"><img title="open-labyrinth"
+<p class="for_info_only"><img title="open-labyrinth"
                                  src="{{ MEDIA }}open-labyrinth.png"
                                  alt="open-labyrinth"
                                  width="600px"/></p>
-<p class="p1 for_editor_only"><img title="open-labyrinth"
+<p class="for_editor_only"><img title="open-labyrinth"
                                    src="{{ MEDIA }}open-labyrinth.png"
                                    alt="open-labyrinth"
                                    width="380px"/></p>
 
 <p>
-    <strong>Input: </strong> A labyrinth's map. A list of lists with 1 and 0.
+    <strong>Input: </strong> A labyrinth map as a list of lists with 1 and 0.
 </p>
 
 <p>
-    <strong>Output: </strong> A route. A string that contain "W", "E", "N" and "S".
+    <strong>Output: </strong> The route as a string that contains "W", "E", "N" and "S".
 </p>
 
 
@@ -128,7 +128,8 @@
 <p>
     <strong>Precondition:</strong>
     Outer cells are pits.<br>
-    |labyrinth| = 12 x 12
+    len(labyrinth) == 12<br>
+    all(len(row) == 12 for row in labyrinth)<br>
 </p>
 
 <p class="for_info_only">
