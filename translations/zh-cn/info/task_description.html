@@ -1,0 +1,129 @@
+﻿
+
+<div class="story">
+    <p>斯蒂芬和索菲亚一时迷路了，在船上用堆积起来的固定住的东西上休息。偶然地他们漫步到了一个他们以前从未在他们的岛屿上见过的一个开放的迷宫。</p>
+
+    <p>“你看，有很多的冒险就在这里。”斯蒂芬感叹道。 “你真的确定你要离开？”</p>
+
+    <p>“胡说。真正的冒险就在那里！“索菲亚回应，同时挥舞着天空。 “但是，也许我们可以在我们升空进入未知前在这里征服
+这个小的挑战......”</p>
+</div>
+
+<p>
+    迷宫没有墙壁，但是每条边的路被坑包围。如果一个玩家掉在坑里的话，他们就丢失了。迷宫是用矩阵来表示（含有列表的列表）: 1是坑，0的路径的一部分。 迷宫的大小是12×12，外界都是坑。玩家在点（1,1）开始。出口是在点（10,10）。 你需要找到通过迷宫的路径。 玩家只能通过四个方向移动 南（下 [1,0]），北（上 [-1,0]），
+    东（右[0,1]），西（左[0，-1]）。这条路线被描述成由不同的字符组成的字符串：“S”=南，“N”=北，“E”=东，和“W”=西。
+</p>
+
+<p class="for_info_only"><img title="open-labyrinth"
+                                 src="{{ MEDIA }}open-labyrinth.png"
+                                 alt="open-labyrinth"
+                                 width="600px"/></p>
+<p class="for_editor_only"><img title="open-labyrinth"
+                                   src="{{ MEDIA }}open-labyrinth.png"
+                                   alt="open-labyrinth"
+                                   width="380px"/></p>
+
+<p>
+    <strong>输入: </strong> 用由1和0组成的列表所表示的一个迷宫图。
+</p>
+
+<p>
+    <strong>输出: </strong> 用由"W", "E", "N" 和 "S"组成的字符串所表示的路径。
+</p>
+
+
+<div class="for_info_only">
+    <p>
+        <strong>范例:</strong>
+    </p>
+    <pre class="brush: python">checkio([
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1],
+    [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])</pre>
+</div>
+
+
+
+
+<style>
+    #task-hints .hint {
+        display: none;
+    }
+
+    #task-hints ul {
+        margin-top: 10px;
+    }
+
+    #task-hints ul li {
+        text-indent: 20px;
+        font-style: italic;
+    }
+</style>
+
+<div>
+    <strong>提示:</strong> 如果你碰到困难，这能够帮助你<br>
+    <div id="task-hints">
+        <ul>
+            <li>
+                <a href="javascript: void(0)">显示提示 1</a>
+                <span class="hint">
+                    在该任务中的迷宫可以表示成图。想想你可以从每个单元到达哪里，并在图中找到关联路径。
+                </span>
+            </li>
+            <li>
+                <a class="hint-link" href="javascript: void(0)">显示提示 2</a>
+                <span class="hint">
+                    最简单的方法是用广度优先搜索算法。但是不要混淆了图和树搜索。
+                </span>
+            </li>
+            <li>
+                <a class="hint-link" href="">显示提示 3</a>
+                <span class="hint">
+                    你想要好的和快速的解决方案？阅读关于A *搜索算法，不要忘了启发式的方法。
+                </span>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var $hintLink = $("#task-hints li a");
+    $hintLink.click(function(e){
+        e.preventDefault();
+        var $this = $(this);
+        $this.hide();
+        $this.parent().find(".hint").slideDown();
+        return false;
+    })
+</script>
+
+
+
+
+<p class="for_info_only">
+    <strong>如何使用：</strong>
+    这是为在图中的路径寻找的经典问题 - 是的，迷宫可以表示为图。它可用于在导航软件从a到b的导航和电脑游戏中的人工智能。 你可以找到你想要到达任何地方的路径。只是将一个地图变成方形单元还有标记不能走的地方。
+</p>
+
+<p>
+    <strong>前提:</strong>
+    外界单位都是坑<br>
+    len(labyrinth) == 12<br>
+    all(len(row) == 12 for row in labyrinth)<br>
+</p>
+
+<p class="for_info_only">
+    <strong>How to use TryIt: </strong><br>
+    <iframe width="560" height="315" src="//www.youtube.com/embed/0Pah2CvWTpc" frameborder="0" allowfullscreen></iframe>
+</p>
+
