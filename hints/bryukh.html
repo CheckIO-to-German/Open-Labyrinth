@@ -1,0 +1,75 @@
+<body data-author="bryukh">
+<div class="question-answer">
+    <div class="question">
+        I have no idea how to start solving this mission
+    </div>
+    <div class="answer">
+        You could use a variety of path-finding algorithms for this mission if you wished.
+        For this, let's look at <a href="http://en.wikipedia.org/wiki/Breadth-first_search">
+        Breadth First Search</a>.
+        First you form a queue and take the elements from inside it.
+        For a graph search we should write down which are the "visited" nodes.
+<pre class="brush: python">
+    </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I need some help to proceed with the mission
+    </div>
+    <div class="answer">
+        First we need state representation. Let's use a tuple with coordinates and the path.
+
+<pre class="brush: python">
+queue = [((1, 1), "")] # we will use list for simplicity
+visited = set()
+    </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I am gone half way through. Need help!
+    </div>
+    <div class="answer">
+        Next look at the queue elements and check if it's a goal.
+        If not, add the new nodes in queue. If the node is marked as visited you can pass it.
+
+<pre class="brush: python">
+while queue:
+    position, path = queue.pop(0)
+    if position == (10, 10):
+        return path
+    if position in visited:
+        continue
+    </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I am stuck. I need a small hint.
+    </div>
+    <div class="answer">
+        Now check all available neighboring cells and add them to the queue.
+        We need the positions and directions for these cells.
+
+<pre class="brush: python">
+...
+    for neigh_position, direction in get_neighbours(maze, positions):
+        if neigh_position in visited:
+            continue
+        queue.append(neigh_position, path + direction)
+</pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I tried all I could. Nothing works. SOS
+    </div>
+    <div class="answer">
+        If you solved the "Moore Neighborhood" mission,
+        then you can write a similar "get_neighbours" function. Don't forget to get the directions.
+
+    </div>
+</div>
+
+</body>
