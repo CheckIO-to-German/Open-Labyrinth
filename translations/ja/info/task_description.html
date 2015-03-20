@@ -1,0 +1,106 @@
+<div class="story">
+    <div style="text-align: center">
+        <img src="{{MEDIA}}illustration0.png" title="bushes" alt="bush-maze" width="600px">
+    </div>
+
+    <p>「その迷路は朝飯前かい？じゃあどうやって分割して扱うか調べようか…」</p>
+    <!-- <p>"So, the Labyrinth is a piece of cake, is it? Well, let's see how you deal with this little
+        slice..."</p> -->
+
+        <p>サラ: 「あなたは迷路を抜ける道を知るチャンスはないわよね？」<br>
+            ウジ虫: 「私かい？ただのウジ虫だよ。ねえ、こっちへ来て、奥さんに会って」</p>
+
+    <!-- <p>Sarah: "You don't by any chance know the way through this labyrinth, do you?"<br>
+        The Worm: "Who, me? No, I'm just a worm. Say, come inside, and meet the missus"</p> -->
+
+    <p>"Labyrinth" (1986)</p>
+</div>
+
+<p>
+  その迷路は壁はない、しかしそれぞれの端をやぶが取り囲んでいる。
+  もしプレイヤーがやぶへ移動したら彼らは迷う。
+  迷路は行列(リストのリスト)で表される、 1 がやぶで0が経路の部分である。
+  迷路のサイズは12 x 12で外側の部屋もやぶである。
+  プレイヤーは(1,1)の部屋にいる。出口は(10, 10)の部屋である。
+  あなたは迷路を通り抜ける道筋を探す必要がある。
+  プレイヤーは4つの方向にしか動けない ー 南 (下 [1, 0])、北 (上 [-1, 0])、東(右 [0, 1])、西(左 [0, -1])。
+  道筋は次からなる文字列で表される。"S" が南、"N"が北、"E"が東、"W"が西。
+
+    <!-- The labyrinth has no walls, but bushes surround the path on each side.
+    If a players move into a bush, they lose.
+    The labyrinth is presented as a matrix (a list of lists): 1 is a bush and 0 is part of the path.
+    The labyrinth's size is 12 x 12 and the outer cells are also bushes.
+    Players start at cell (1,1). The exit is at cell (10,10).
+    You need to find a route through the labyrinth.
+    Players can move in only four directions--South (down [1,0]), North (up [-1,0]),
+    East (right [0,1]), West (left [0, -1]).
+    The route is described as a string consisting of different characters:
+    "S"=South, "N"=North, "E"=East, and "W"=West. -->
+</p>
+
+<p class="for_info_only"><img title="open-labyrinth"
+                              src="{{ MEDIA }}open-labyrinth.png"
+                              alt="open-labyrinth"
+                              width="600px"/></p>
+<p class="for_editor_only"><img title="open-labyrinth"
+                                src="{{ MEDIA }}open-labyrinth.png"
+                                alt="open-labyrinth"
+                                width="380px"/></p>
+
+<p>
+    <strong>入力 </strong> 1と0からなるリストのリストで表された迷路のマップ
+</p>
+
+<p>
+    <strong>出力 </strong> "W" "E" "N" "S" を含む道筋を表す文字列
+</p>
+
+
+<div class="for_info_only">
+    <p>
+        <strong>例</strong>
+    </p>
+    <pre class="brush: python">checkio([
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1],
+    [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])</pre>
+</div>
+
+
+<p class="for_info_only">
+  <strong>どうやって使われるか </strong>
+  これは古典的なグラフの経路探索問題である ― もちろん、迷路はグラフとして表すことができる。
+  それはaからbへと導くナビゲーションソフトに使われており、コンピューターゲームの人工知能にも使われる。
+  あなたは望みどおりに道を探すことができる、マップを四角の部屋に分割して「悪い」部屋として印を付けるように。
+
+    <!-- <strong>How it is used: </strong>
+    This is a classical problem for path-finding in graphs -- Yes, the maze can be represented as a
+    graph.
+    It can be used in navigation software for a to b navigation and computer games for artificial
+    intelligence.
+    You can find your way anywhere you wish. Just divide a map into square cells and mark up the
+    "bad" cells. -->
+</p>
+
+<p>
+    <strong>事前条件</strong>
+    外側のセルは穴である。<br>
+    <!-- Outer cells are pit.<br> -->
+    len(labyrinth) == 12<br>
+    all(len(row) == 12 for row in labyrinth)<br>
+</p>
+
+<p class="for_info_only">
+    <strong>TryIt の使い方 </strong><br>
+    <iframe width="560" height="315" src="//www.youtube.com/embed/0Pah2CvWTpc" frameborder="0"
+            allowfullscreen></iframe>
+</p>
