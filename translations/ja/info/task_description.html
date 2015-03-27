@@ -7,8 +7,8 @@
     <!-- <p>"So, the Labyrinth is a piece of cake, is it? Well, let's see how you deal with this little
         slice..."</p> -->
 
-        <p>サラ: 「あなたは迷路を抜ける道を知るチャンスはないわよね？」<br>
-            ウジ虫: 「私かい？ただのウジ虫だよ。ねえ、こっちへ来て、奥さんに会って」</p>
+        <p>サラ: 「あなたには迷路を抜ける道を知るチャンスはないわよね？」<br>
+            ウジ虫: 「私かい？ないよ、ただのウジ虫だよ。ねえ、中に来て奥さんに会って」</p>
 
     <!-- <p>Sarah: "You don't by any chance know the way through this labyrinth, do you?"<br>
         The Worm: "Who, me? No, I'm just a worm. Say, come inside, and meet the missus"</p> -->
@@ -23,7 +23,7 @@
   迷路のサイズは12 x 12で外側の部屋もやぶである。
   プレイヤーは(1,1)の部屋にいる。出口は(10, 10)の部屋である。
   あなたは迷路を通り抜ける道筋を探す必要がある。
-  プレイヤーは4つの方向にしか動けない ー 南 (下 [1, 0])、北 (上 [-1, 0])、東(右 [0, 1])、西(左 [0, -1])。
+  プレイヤーは4つの方向にしか動けない -- 南 (下 [1, 0])、北 (上 [-1, 0])、東(右 [0, 1])、西(左 [0, -1])。
   道筋は次からなる文字列で表される。"S" が南、"N"が北、"E"が東、"W"が西。
 
     <!-- The labyrinth has no walls, but bushes surround the path on each side.
@@ -78,9 +78,9 @@
 
 <p class="for_info_only">
   <strong>どうやって使われるか </strong>
-  これは古典的なグラフの経路探索問題である ― もちろん、迷路はグラフとして表すことができる。
-  それはaからbへと導くナビゲーションソフトに使われており、コンピューターゲームの人工知能にも使われる。
-  あなたは望みどおりに道を探すことができる、マップを四角の部屋に分割して「悪い」部屋として印を付けるように。
+  これは古典的なグラフの経路探索問題である -- もちろん、迷路はグラフとして表すことができる。
+  それはaからbへと導くナビゲーションソフトに使われており、コンピューターゲームのAIにも使われる。
+  あなたは望むように道を探すことができる、マップを四角の部屋に分割して「悪い」部屋として印を付けるように。
 
     <!-- <strong>How it is used: </strong>
     This is a classical problem for path-finding in graphs -- Yes, the maze can be represented as a
