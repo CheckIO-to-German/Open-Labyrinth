@@ -1,0 +1,87 @@
+<div class="story">
+    <div style="text-align: center">
+        <img src="{{MEDIA}}illustration0.png" title="bushes" alt="bush-maze" width="600px">
+    </div>
+    <p>"So, the Labyrinth is a piece of cake, is it? Well, let's see how you deal with this little
+        slice..."</p>
+
+    <p>Sarah: "You don't by any chance know the way through this labyrinth, do you?"<br>
+        The Worm: "Who, me? No, I'm just a worm. Say, come inside, and meet the missus"</p>
+
+    <p>"Labyrinth" (1986)</p>
+</div>
+
+<p>
+    Le labyrinthe n'a pas de murs, mais des buissons entourent le chemin de chaque côté.
+	Le joueur perd s'il va sur une cellule occupée par un buisson. 
+	Le labyrinthe est représenté par une matrice (liste de listes): 1 représente un buisson -
+	0 représente un bout de chemin.
+    Le labyrinthe est de taille 12 x 12 et les cellules en bordure sont des buissons.
+    Le joueur commence à la cellule (1, 1). La sortie est à la cellule (10, 10).
+    Il faut trouver un parcours qui traverse le labyrinthe. Le joueur ne peut se déplacer
+    que dans quatre directions	--
+    South (Sud - vers le bas [1,0]), North (Nord - vers le haut [-1,0]),
+    East (Est - vers la droite [0,1]), West (Ouest - vers la gauche [0, -1]).
+    Le parcours sera décrit comme une chaîne de caractères composée de :
+    "S" = South, "N" = North, "E" = East, and "W" = West.
+</p>
+
+<p class="for_info_only"><img title="open-labyrinth"
+                                 src="{{ MEDIA }}open-labyrinth.png"
+                                 alt="open-labyrinth"
+                                 width="600px"/></p>
+<p class="for_editor_only"><img title="open-labyrinth"
+                                   src="{{ MEDIA }}open-labyrinth.png"
+                                   alt="open-labyrinth"
+                                   width="380px"/></p>
+
+<p>
+    <strong>Input: </strong> Un plan de labyrinthe, comme une liste de listes de 1 et de 0.
+</p>
+
+<p>
+    <strong>Output: </strong>  Le parcours, comme  une chaine de caractères composée de "W", "E", "N" et "S".
+</p>
+
+
+<div class="for_info_only">
+    <p>
+        <strong>Exemple :</strong>
+    </p>
+    <pre class="brush: python">checkio([
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1],
+    [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])</pre>
+</div>
+
+
+
+<p class="for_info_only">
+    <strong>Utilisation: </strong>
+    Ceci est un problème classique de recherche de chemin (path-finding) dans un graphe -- He oui, 
+	la carte du labyrinthe peut être représentée par un graphe. Cela peut être utile en navigation, 
+	pour aller d'un point A à un point B, en intelligence artificielle pour des jeux, ... 
+	dès qu'un plan rectangulaire peut être découpé selon un quadrillage sur lequel 
+	on marque les "mauvaises" cellules.
+</p>
+
+<p>
+    <strong>Précondition:</strong>
+    Les cellules du bord contiennent des 1.<br>
+    len(labyrinth) == 12<br>
+    all(len(row) == 12 for row in labyrinth)<br>
+</p>
+
+<p class="for_info_only">
+    <strong>Comment utiliser TryIt: </strong><br>
+    <iframe width="560" height="315" src="//www.youtube.com/embed/0Pah2CvWTpc" frameborder="0" allowfullscreen></iframe>
+</p>
