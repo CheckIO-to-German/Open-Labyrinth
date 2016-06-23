@@ -28,5 +28,9 @@ api.add_listener(
     ON_CONNECT,
     CheckiOReferee(
         tests=tests.TESTS,
-        checker=check_route
+        checker=check_route,
+        function_name={
+            "python": "checkio",
+            "js": "openLabyrinth"
+        }
     ).on_ready)

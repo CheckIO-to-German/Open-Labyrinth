@@ -1,5 +1,5 @@
 "use strict"
 
-function checkio(map) {
+function openLabyrinth(map) {
 	
 }

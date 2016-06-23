@@ -38,14 +38,10 @@
     "S"=South, "N"=North, "E"=East, and "W"=West. -->
 </p>
 
-<p class="for_info_only"><img title="open-labyrinth"
+<p class="for_info_only" style="text-align:center"><img title="open-labyrinth"
                               src="{{ MEDIA }}open-labyrinth.png"
                               alt="open-labyrinth"
-                              width="600px"/></p>
-<p class="for_editor_only"><img title="open-labyrinth"
-                                src="{{ MEDIA }}open-labyrinth.png"
-                                alt="open-labyrinth"
-                                width="380px"/></p>
+                              style="max-height:400px"/></p>
 
 <p>
     <strong>入力 </strong> 1と0からなるリストのリストで表された迷路のマップ
@@ -60,7 +56,7 @@
     <p>
         <strong>例</strong>
     </p>
-    <pre class="brush: python">checkio([
+    <pre class="brush: python">{% if interpreter.slug == "js-node" %}openLabyrinth{% else %}checkio{% endif %}([
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
