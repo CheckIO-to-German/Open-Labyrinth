@@ -3,45 +3,76 @@
         <img src="{{MEDIA}}illustration0.png" title="bushes" alt="bush-maze" width="600px">
     </div>
 
-    <p>"So, the Labyrinth is a piece of cake, is it? Well, let's see how you deal with this little
-        slice..."</p>
+    <p>
+        Jareth:<br>
+        »Das Labyrinth ist also für Dich ein Zuckerschlecken?«<br>
+        »Dann wollen wir doch mal sehen, wie dieses süße Stückchen Dir bekommt ...«
+    </p>
 
-    <p>Sarah: "You don't by any chance know the way through this labyrinth, do you?"<br>
-        The Worm: "Who, me? No, I'm just a worm. Say, come inside, and meet the missus"</p>
+    <p>
+        ...
+    </p>
 
-    <p>"Labyrinth" (1986)</p>
+    <p>
+        Sarah:<br>
+        »Du weißt nicht zufällig den Weg durch dieses Labyrinth oder?«
+    </p>
+
+    <p>
+        Der Wurm:<br>
+        »Wer? Ich? Nein, ich bin nur ein Wurm.«<br>
+        »Komm mit rein - ich stell dich meiner Alten vor.«
+    </p>
+
+    <p>
+        <a href="http://www.imdb.com/title/tt0091369/">"Die Reise ins Labyrinth"</a> - 1986
+    </p>
 </div>
 
 <p>
-    The labyrinth has no walls, but bushes surround the path on each side.
-    If a players move into a bush, they lose.
-    The labyrinth is presented as a matrix (a list of lists): 1 is a bush and 0 is part of the path.
-    The labyrinth's size is 12 x 12 and the outer cells are also bushes.
-    Players start at cell (1,1). The exit is at cell (10,10).
-    You need to find a route through the labyrinth.
-    Players can move in only four directions--South (down [1,0]), North (up [-1,0]),
-    East (right [0,1]), West (left [0, -1]).
-    The route is described as a string consisting of different characters:
-    "S"=South, "N"=North, "E"=East, and "W"=West.
+    <br>
+    Das Labyrinth hat keine Wände, aber Büsche umgeben den Weg auf jeder Seite.<br>
+    Wenn der Spieler in einen Busch läuft, verliert er.<br>
+    Das Labyrinth wird als Matrix (eine Liste von Listen) dargestellt: 1 ist ein Busch und
+    0 ist Teil des Weges.<br>
+    Die Größe des Labyrinths beträgt 12 x 12 und die äußeren Zellen sind ebenfalls Büsche.<br>
+    Der Spieler beginnt in der Zelle (1; 1). Der Ausgang ist in der Zelle (10; 10).<br>
+    Du musst eine Route durch das Labyrinth finden.<br>
+    Der Spieler kann sich nur in diese vier Richtungen bewegen:
+    <ul>
+        <li>Süden (nach Unten [1, 0])</li>
+        <li>Norden (nach Oben [-1, 0])</li>
+        <li>Osten (nach Rechts [0, 1])</li>
+        <li>Westen (nach Links [0, -1])</li>
+    </ul>
+    Die Route wird als String angegeben, der aus diesen vier verschiedenen Zeichen bestehen darf:
+    <ul>
+        <li>"S" = Süden</li>
+        <li>"N" = Norden</li>
+        <li>"E" = Osten</li>
+        <li>"W" = Westen</li>
+    </ul>
 </p>
 
-<p class="for_info_only" style="text-align:center"><img title="open-labyrinth"
-                              src="{{ MEDIA }}open-labyrinth.png"
-                              alt="open-labyrinth"
-                              style="max-height:400px"/></p>
+<p class="for_info_only" style="text-align:center">
+    <img title="open-labyrinth"
+        src="{{ MEDIA }}open-labyrinth.png"
+        alt="open-labyrinth"
+        style="max-height:400px"/>
+</p>
 
 <p>
-    <strong>Input: </strong> A labyrinth map as a list of lists with 1 and 0.
+    <strong>Eingabe:</strong> Die Karte eines Labyrinths als zweidimensionale Liste,
+    gefüllt mit den Werten 1 oder 0.
 </p>
 
 <p>
-    <strong>Output: </strong> The route as a string that contains "W", "E", "N" and "S".
+    <strong>Ausgabe:</strong> Die Route als String, der "W", "E", "N" und "S" enthält.
 </p>
-
 
 <div class="for_info_only">
     <p>
-        <strong>Example:</strong>
+        <strong>Beispiel:</strong>
     </p>
     <pre class="brush: python">{% if interpreter.slug == "js-node" %}openLabyrinth{% else %}checkio{% endif %}([
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -58,27 +89,25 @@
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])</pre>
 </div>
 
-
 <p class="for_info_only">
-    <strong>How it is used: </strong>
-    This is a classical problem for path-finding in graphs -- Yes, the maze can be represented as a
-    graph.
-    It can be used in navigation software for a to b navigation and computer games for artificial
-    intelligence.
-    You can find your way anywhere you wish. Just divide a map into square cells and mark up the
-    "bad" cells.
+    <strong>Wozu das gut ist:</strong><br>
+    Hier geht es um das klassische Problem der Wegfindung in Graphen - ja, das Labyrinth
+    kann als Graph dargestellt werden.
+    Der Algorithmus kann in Navigationssoftware für die Navigation von A nach B und in
+    Computerspielen für künstliche Intelligenz verwendet werden.
+    Du kannst einen Weg überall hinfinden. Teile einfach eine Karte in quadratische Zellen
+    und markiere die blockierten Zellen.
 </p>
 
 <p>
-    <strong>Precondition:</strong>
-    Outer cells are pits.<br>
+    <strong>Bedingungen:</strong><br>
+    Äußeren Zellen sind Büsche.<br>
     len(labyrinth) == 12<br>
     all(len(row) == 12 for row in labyrinth)<br>
 </p>
 
 <p class="for_info_only">
-    <strong>How to use TryIt: </strong><br>
+    <strong>So funktioniert <i>"Try"</i>: </strong><br>
     <iframe width="560" height="315" src="//www.youtube.com/embed/0Pah2CvWTpc" frameborder="0"
             allowfullscreen></iframe>
 </p>
-
